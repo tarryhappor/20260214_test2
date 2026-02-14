@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>診断中</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+  <h2 id="progress"></h2>
+  <div id="questionBox"></div>
+  <button onclick="nextPage()">次へ</button>
+</div>
+
+<script src="js/questions.js"></script>
+<script src="js/logic.js"></script>
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+let page = parseInt(urlParams.get("page"));
+
+loadQuestions(page);
+
+function nextPage(){
+  if(page < 4){
+    window.location.href="question.html?page="+(page+1);
+  }else{
+    calculateResult();
+  }
+}
+</script>
+</body>
+</html>

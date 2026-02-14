@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>診断の真相</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+<h2>どちらかを選んでください</h2>
+<button onclick="show(0)">狂＿の公園診断</button>
+<button onclick="show(1)">＿気の公園診断</button>
+<p id="meaning"></p>
+</div>
+
+<script>
+let type = localStorage.getItem("resultType");
+
+function show(n){
+  document.getElementById("meaning").innerText=
+  "あなたの"+(n+1)+"文字目は「"+type[n]+"」です。";
+}
+</script>
+</body>
+</html>

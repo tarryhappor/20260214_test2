@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>診断結果</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+  <h1 id="title"></h1>
+  <h2 id="subtitle"></h2>
+  <p id="text"></p>
+  <img id="image" width="300">
+  <br><br>
+  <button onclick="window.location.href='truth.html'">診断の真相を知る</button>
+</div>
+
+<script src="js/resultData.js"></script>
+<script>
+let type = localStorage.getItem("resultType");
+let data = results[type];
+
+document.getElementById("title").innerText=data.title;
+document.getElementById("subtitle").innerText=data.subtitle;
+document.getElementById("text").innerText=data.text;
+document.getElementById("image").src="img/"+data.img;
+</script>
+
+</body>
+</html>
