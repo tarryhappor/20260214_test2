@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
 .hidden{ display:none; }
+.action-btn{
+margin-top:12px;
+}
 </style>
 </head>
 
@@ -20,11 +23,39 @@
   <button onclick="choose('you')">あなた</button>
 </div>
 
-<p id="resultText"></p>
+<div id="afterArea" class="hidden">
+  <p style="font-weight:bold; font-size:18px;">
+    本当に公園へ行くあなたは、誰よりも＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+  </p>
+
+  <button class="action-btn" onclick="goMap()">MAPに移動</button>
+  <button class="action-btn" onclick="sendGmail()">Gmailで10年後の自分に診断結果を予約送信</button>
+  <button class="action-btn" onclick="shareSNS()">SNSで診断結果を共有</button>
+</div>
 
 </div>
 
 <script>
+
+// 公園ごとのGoogleMapリンク
+const parkMap = {
+ERPA:"https://www.google.com/maps/search/夏島グラウンド",
+ERPC:"https://www.google.com/maps/search/大津おりょうさん公園",
+ERFA:"https://www.google.com/maps/search/野比はなわ公園",
+ERFC:"https://www.google.com/maps/search/ペリー公園",
+ESPA:"https://www.google.com/maps/search/はまゆう公園",
+ESPC:"https://www.google.com/maps/search/すみれ公園",
+ESFA:"https://www.google.com/maps/search/船越６丁目第３公園",
+ESFC:"https://www.google.com/maps/search/吉倉公園",
+IRPA:"https://www.google.com/maps/search/神奈川県立観音崎公園",
+IRPC:"https://www.google.com/maps/search/腹切松公園",
+IRFA:"https://www.google.com/maps/search/大矢部みどりの公園",
+IRFC:"https://www.google.com/maps/search/浦上台トンネルの上公園",
+ISPA:"https://www.google.com/maps/search/三春公園",
+ISPC:"https://www.google.com/maps/search/佐島の丘１第２公園",
+ISFA:"https://www.google.com/maps/search/日向公園",
+ISFC:"https://www.google.com/maps/search/緒明山公園"
+};
 
 function choose(answer){
 
@@ -35,9 +66,44 @@ function choose(answer){
 
   if(answer === "me"){
     document.getElementById("choiceArea").style.display="none";
-    document.getElementById("resultText").innerText =
-    "公園への行き方";
+    document.getElementById("afterArea").classList.remove("hidden");
   }
+}
+
+// MAP移動
+function goMap(){
+  const type = localStorage.getItem("resultType");
+  window.open(parkMap[type], "_blank");
+}
+
+// Gmail予約送信（ユーザー側で送信日時を未来設定）
+function sendGmail(){
+  const type = localStorage.getItem("resultType");
+  const subject = encodeURIComponent("10年後のわたしへ｜公園診断結果");
+  const body = encodeURIComponent(
+    "10年後のわたしへ。\n\n" +
+    "あなたの診断結果は「"+type+"」でした。\n\n" +
+    "本当にその公園の近くで暮らしていますか？\n\n" +
+    "＿＿の公園診断より"
+  );
+
+  window.open(
+    `https://mail.google.com/mail/?view=cm&fs=1&su=${subject}&body=${body}`,
+    "_blank"
+  );
+}
+
+// SNS共有（X共有）
+function shareSNS(){
+  const type = localStorage.getItem("resultType");
+  const text = encodeURIComponent(
+    "わたしの10年後の最寄り公園は「"+type+"」でした。\n#＿＿の公園診断"
+  );
+
+  window.open(
+    `https://twitter.com/intent/tweet?text=${text}`,
+    "_blank"
+  );
 }
 
 </script>
