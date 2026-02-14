@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>＿＿の公園診断</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+  <h1>＿＿の公園診断</h1>
+  <p>あなたの＿＿＿＿の＿＿＿公園を診断します</p>
+  <button onclick="startDiagnosis()">診断をはじめる</button>
+</div>
+
+<script>
+function startDiagnosis(){
+  localStorage.clear();
+  window.location.href="question.html?page=1";
+}
+</script>
+</body>
+</html>
