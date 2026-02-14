@@ -5,23 +5,57 @@
 <meta charset="UTF-8">
 <title>診断の真相</title>
 <link rel="stylesheet" href="css/style.css">
+<style>
+.hidden{ display:none; }
+.fade{
+  animation: fadeIn 0.6s ease forwards;
+}
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+</style>
 </head>
+
 <body>
 <div class="container">
+
 <h2>どちらかを選んでください</h2>
-<button onclick="show(0)">狂＿の公園診断</button>
-<button onclick="show(1)">＿気の公園診断</button>
-<p id="meaning"></p>
+
+<button onclick="showReason(1)">狂＿の公園診断</button>
+<button onclick="showReason(2)">＿気の公園診断</button>
+
+<div id="textArea" class="hidden">
+  <p id="message"></p>
+  <button onclick="goNext()">さらに進む</button>
+</div>
+
 </div>
 
 <script>
-let type = localStorage.getItem("resultType");
 
-function show(n){
-  document.getElementById("meaning").innerText=
-  "あなたの"+(n+1)+"文字目は「"+type[n]+"」です。";
+function showReason(type){
+
+  const area = document.getElementById("textArea");
+  const message = document.getElementById("message");
+
+  if(type === 1){
+    message.innerText =
+    "この診断が生まれた理由を知るにはここをクリック";
+  }else{
+    message.innerText =
+    "この診断を開発したまちを知るにはここをクリック";
+  }
+
+  area.classList.remove("hidden");
+  area.classList.add("fade");
 }
-</script>
-</body>
 
+function goNext(){
+  window.location.href="mad.html";
+}
+
+</script>
+
+</body>
 </html>
