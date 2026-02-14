@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>狂っているのはだれ？</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.hidden{ display:none; }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h2>狂っているのはだれ？</h2>
+
+<div id="choiceArea">
+  <button onclick="choose('me')">わたし</button>
+  <button onclick="choose('you')">あなた</button>
+</div>
+
+<p id="resultText"></p>
+
+</div>
+
+<script>
+
+function choose(answer){
+
+  if(answer === "you"){
+    // 永遠ループ
+    window.location.href="mad.html";
+  }
+
+  if(answer === "me"){
+    document.getElementById("choiceArea").style.display="none";
+    document.getElementById("resultText").innerText =
+    "公園への行き方";
+  }
+}
+
+</script>
+
+</body>
+</html>
