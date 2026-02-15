@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-<!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q4HQN7LKES"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -10,8 +10,8 @@
   gtag('config', 'G-Q4HQN7LKES');
 </script>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>診断中</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -19,19 +19,37 @@
 
 <div class="container">
   <h2 id="progress"></h2>
-  <div id="questionBox"></div>
-  <button onclick="nextPage()">次へ</button>
+  <form id="questionForm">
+    <div id="questionBox"></div>
+    <button type="button" onclick="nextPage()">次へ</button>
+  </form>
 </div>
 
 <script src="js/questions.js"></script>
 <script src="js/logic.js"></script>
+
 <script>
 const urlParams = new URLSearchParams(window.location.search);
-let page = parseInt(urlParams.get("page"));
+let page = parseInt(urlParams.get("page")) || 1;
 
 loadQuestions(page);
 
+// 回答保存してから遷移
 function nextPage(){
+
+  const form = document.getElementById("questionForm");
+  const formData = new FormData(form);
+
+  // 4問すべて回答チェック
+  if(formData.size < 4){
+    alert("すべての質問に答えてください");
+    return;
+  }
+
+  formData.forEach((value,key)=>{
+    localStorage.setItem(key,value);
+  });
+
   if(page < 4){
     window.location.href="question.html?page="+(page+1);
   }else{
@@ -39,7 +57,6 @@ function nextPage(){
   }
 }
 </script>
+
 </body>
-
 </html>
-
